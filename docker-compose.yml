@@ -6,7 +6,7 @@ services:
     ports:
       - "80"
     environment:
-      - NGINX_CLIENT_MAX_BODY_SIZE=${NGINX_CLIENT_MAX_BODY_SIZE:-256M}
+      - NGINX_CLIENT_MAX_BODY_SIZE=${NGINX_CLIENT_MAX_BODY_SIZE:-512M}
     volumes:
       - wordpress_data:/var/www/html:ro
     depends_on:
@@ -19,7 +19,7 @@ services:
       resources:
         limits:
           cpus: "${NGINX_CPU_LIMIT:-0.5}"
-          memory: "${NGINX_MEMORY_LIMIT:-256M}"
+          memory: "${NGINX_MEMORY_LIMIT:-512M}"
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost/healthz"]
       interval: 30s
@@ -38,13 +38,13 @@ services:
       - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
       - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME:-wordpress}
       - WORDPRESS_CONFIG_EXTRA=
-          define('WP_REDIS_HOST', 'redis');
-          define('WP_REDIS_PORT', 6379);
-          define('WP_CACHE', true);
+        define('WP_REDIS_HOST', 'redis');
+        define('WP_REDIS_PORT', 6379);
+        define('WP_CACHE', true);
       # PHP Settings
-      - PHP_UPLOAD_MAX_FILESIZE=${PHP_UPLOAD_MAX_FILESIZE:-256M}
-      - PHP_POST_MAX_SIZE=${PHP_POST_MAX_SIZE:-256M}
-      - PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-256M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_UPLOAD_MAX_FILESIZE:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_POST_MAX_SIZE:-512M}
+      - PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-512M}
       - PHP_MAX_EXECUTION_TIME=${PHP_MAX_EXECUTION_TIME:-300}
       - PHP_MAX_INPUT_TIME=${PHP_MAX_INPUT_TIME:-300}
       - PHP_MAX_INPUT_VARS=${PHP_MAX_INPUT_VARS:-3000}
@@ -100,7 +100,7 @@ services:
 
   redis:
     image: redis:alpine
-    command: redis-server --maxmemory ${REDIS_MAXMEMORY:-256mb} --maxmemory-policy ${REDIS_MAXMEMORY_POLICY:-allkeys-lru}
+    command: redis-server --maxmemory ${REDIS_MAXMEMORY:-512mb} --maxmemory-policy ${REDIS_MAXMEMORY_POLICY:-allkeys-lru}
     volumes:
       - redis_data:/data
     networks:
@@ -143,7 +143,7 @@ services:
     environment:
       - PMA_HOST=db
       - PMA_PORT=3306
-      - UPLOAD_LIMIT=${PMA_UPLOAD_LIMIT:-256M}
+      - UPLOAD_LIMIT=${PMA_UPLOAD_LIMIT:-512M}
     ports:
       - "80"
     depends_on:
@@ -156,7 +156,7 @@ services:
       resources:
         limits:
           cpus: "${PHPMYADMIN_CPU_LIMIT:-0.5}"
-          memory: "${PHPMYADMIN_MEMORY_LIMIT:-256M}"
+          memory: "${PHPMYADMIN_MEMORY_LIMIT:-512M}"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
       interval: 30s
