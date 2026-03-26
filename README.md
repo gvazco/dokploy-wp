@@ -35,7 +35,7 @@ Production-ready WordPress deployment stack optimized for Dokploy with Redis cac
 ### Option B: Manual Compose Deploy
 
 1. Create a new **Compose** service in Dokploy
-2. Point to: `https://github.com/itsmereal/dokploy-wp`
+2. Point to: `https://github.com/gvazco/dokploy-wp`
 3. Set Compose Path: `./docker-compose.yml`
 4. Go to **Environment** tab and add:
    ```
