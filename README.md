@@ -23,7 +23,7 @@ Production-ready WordPress deployment stack optimized for Dokploy with Redis cac
 4. Choose **Template**
 5. Set the **Base URL** to:
    ```
-   https://raw.githubusercontent.com/itsmereal/dokploy-wp/main
+   https://raw.githubusercontent.com/gvazco/dokploy-wp/main
    ```
 6. You will find **"WordPress + Redis Stack"**
 7. Click **Create** and **Confirm**
